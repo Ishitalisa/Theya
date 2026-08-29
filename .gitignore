@@ -12,13 +12,20 @@
 
 # testing
 /coverage
+/test-results/
+/playwright-report/
+/.anvil-e2e.log
 
 # next.js
 /.next/
+/.next-*/
 /out/
 
 # production
 /build
+/contracts/cache/
+/contracts/out/
+/contracts/broadcast/
 
 # misc
 .DS_Store
@@ -32,6 +39,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
