@@ -63,6 +63,36 @@ publisher's terms before production or commercial use.
 - x402 v2 for paid, independent evidence audits
 - Playwright for responsive browser tests
 
+## Project structure
+
+```text
+contracts/               Foundry project for the on-chain market
+  src/FlashMarket.sol      the TheyaMarket contract
+  script/Deploy.s.sol      deployment script
+  test/FlashMarket.t.sol   contract tests
+public/                  static assets, such as the logo
+scripts/start-e2e.sh     starts a local Anvil chain and the app for the Playwright tests
+src/app/                 Next.js App Router: pages (/ and /portfolio), manifest, API routes
+  api/agent/create         cron route: creates markets from validated news
+  api/agent/resolve        cron route: resolves closed markets
+  api/agent-card           ERC-8004 registration document for the resolver
+  api/markets              market list
+  api/portfolio            a wallet's portfolio
+  api/oracle/audit         paid (x402) evidence audit for a closed market
+src/components/          UI: news deck and cards, bet panel, portfolio view,
+                         wallet button, header, providers, PWA registration
+src/hooks/use-markets.ts client hook that loads markets
+src/lib/
+  agent.ts                 proposes markets, resolves them, validates resolutions
+  agent-chain.ts           publishes markets and resolutions; reads markets and portfolios from the contract
+  chain.ts                 Monad Testnet definition, contract ABI and constants
+  cron.ts                  checks the cron secret on agent routes
+  deadline.ts              computes the 00:00 Asia/Kolkata close for an article
+  news.ts                  fetches and validates RSS articles
+  types.ts                 shared types
+tests/e2e/               Playwright browser tests
+```
+
 ## Local development
 
 Requirements: Node.js 22+, npm, and Foundry.
